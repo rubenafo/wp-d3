@@ -66,6 +66,6 @@ add_shortcode("d3-source", "print_source");
 remove_filter('the_content', 'wptexturize');
 remove_filter('the_content', 'wpautop' );
 // and added again with less priority
-// add_filter( 'the_content', 'wpautop' , 99);
-//add_filter( 'the_content', 'wptexturize' , 99);
+add_filter( 'the_content', 'wpautop' , 99);
+add_filter( 'the_content', 'wptexturize' , 99);
 ?>
