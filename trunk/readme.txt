@@ -1,10 +1,10 @@
-=== Wp-D3 ===
+﻿=== Wp-D3 ===
 Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -48,4 +48,9 @@ Lets wait until next version.
 * First commit. Basic tag functionality, [d3-link], [d3 canvas="canvas"]
 = 1.1 =
 * Fixed d3 snippet insertion, now the code output is shown where it has been inserted inside the post.
-
+= 1.2 =
+* Fixed bug that provoked wpautop and wptexturize to be disabled permanently.
+* Fixed d3-link include's generation.
+* Added filter to avoid wptexturize messing the [d3-source] content.
+* Updated D3 shipped version to last 3.3.3
+* The plugin now uses the lighter d3.v3.min.js (instead of d3.v3.js).
