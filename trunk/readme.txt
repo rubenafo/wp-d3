@@ -3,8 +3,8 @@ Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.2
+Tested up to: 3.6
+Stable tag: 1.2.1
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -54,3 +54,5 @@ Lets wait until next version.
 * Added filter to avoid wptexturize messing the [d3-source] content.
 * Updated D3 shipped version to last 3.3.3
 * The plugin now uses the lighter d3.v3.min.js (instead of d3.v3.js).
+= 1.2.1 =
+* Implemented workaround to keep '&' symbols inside javascript code without unicode conversion.

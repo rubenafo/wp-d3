@@ -4,7 +4,7 @@ Plugin Name: Wordpress-d3.js
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be update as "Media" to the Wordpress blog.
-Version: 1.2
+Version: 1.2.1
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2
@@ -63,11 +63,24 @@ function print_source ($attr, $content) {
 * This function avoids wptexturize from modifying the d3 code,
 * just in case remove_filter() doesn't work as expected.
 */ 
-function skip_d3_source($shortcodes){
+function skip_d3_source($shortcodes){ 
     $shortcodes[] = 'd3-source';
     return $shortcodes;
 }
 add_filter( 'no_texturize_shortcodes', 'skip_d3_source' );
+
+/*
+ * This function restores the ampersand that the inner wordpress behaviour changed somehow.
+ * In the end, no forums nor docs seem to agree how to fix this, but this workaround works.
+ * The first ampersand code is replaced when the post is edited in Visual Mode.
+ * The second ampersand code is replaced by wordpress itself.
+ */
+function restore_special_chars ($content)
+{
+  $content = preg_replace('/&#038;/','&', $content);
+  $content = preg_replace('/&amp;/','&', $content);
+  return $content;
+}
 
 // remove wpautop and wptexturize for a while
 remove_filter('the_content', 'wptexturize');
@@ -78,6 +91,12 @@ add_shortcode("d3-link", "include_resources");
 add_shortcode("d3-source", "print_source");
 
 // and added again with less priority.
-add_filter( 'the_content', 'wpautop' , 99);
-add_filter( 'the_content', 'wptexturize' , 99);
+add_filter( 'the_content', 'wpautop' , 90);
+add_filter( 'the_content', 'wptexturize' , 90);
+/* 
+ * Added with even less priority to make sure it's executed at the end
+ * so the ampersands are restored.
+ */
+add_filter ('the_content', 'restore_special_chars', 95);
 ?>
+
