@@ -1,10 +1,10 @@
 ﻿=== Wp-D3 ===
 Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
-Tags: d3, visualization, javascript
+Tags: d3, visualization, javascript, svg
 Requires at least: 3.0
-Tested up to: 3.6
-Stable tag: 1.2.1
+Tested up to: 3.7
+Stable tag: 1.2.2
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -19,11 +19,12 @@ Enjoy!.
 1. Upload `wp-d3/` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Edit your page/post in Text mode (to avoid replacement of '<' and '>')
-4. Add the tags [d3-link][/d3-link].
+4. If you have any extra dependency, add the tags [d3-link][/d3-link], 
+   if not jump directly to step 6.
 5. If your code depends on .js, .css, .json third files:
-    Click between the tags to place the mouse cursor.
-    Add the deps files through 'Add Media' button, select them, and then click on 'Insert into page'.
-    The returned links should be now between the tags [d3-link] and [/d3-link] tags. 
+    Click between the [d3-link] tags to place the mouse cursor.
+    Add the deps files to the post through 'Add Media' button, select them, and then click on 'Insert into page'.
+    The returned links should be now between the [d3-link] and [/d3-link] tags. 
     Example: [d3-link]
              <a href="http://figurebelow.com/wp-content/uploads/2013/02/mixes.js">mixes</a>
              [/d3-link]
@@ -34,10 +35,13 @@ Enjoy!.
 8. Enjoy!
 
 == Frequently Asked Questions == 
-Lets wait until next version.
+Check the support forum.
 
 == Upgrade Notice == 
 * Update Wordpress-d3 to version 1.0, first implementation.
+
+= 1.2.2 =
+This version fixes a bug on plugin init. d3-link tag is now optional. Upgrade recommended.
 
 == Screenshots ==
 
@@ -45,7 +49,7 @@ Lets wait until next version.
 
 == Changelog ==
 = 1.0.0 =
-* First commit. Basic tag functionality, [d3-link], [d3 canvas="canvas"]
+* First commit. Basic tag functionality, [d3-link], [d3-source canvas="canvas"]
 = 1.1 =
 * Fixed d3 snippet insertion, now the code output is shown where it has been inserted inside the post.
 = 1.2 =
@@ -56,3 +60,7 @@ Lets wait until next version.
 * The plugin now uses the lighter d3.v3.min.js (instead of d3.v3.js).
 = 1.2.1 =
 * Implemented workaround to keep '&' symbols inside javascript code without unicode conversion.
+= 1.2.2 =
+* Fixed plugin initialization bug that generated a wrong js script include.
+* The [d3-link] tag is now optional and can be skipped if nothing needs to be included.
+* The shipped d3.js version has been updated to D3 v3.3.10
