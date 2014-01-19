@@ -1,0 +1,46 @@
+.ui-icon-close { 
+ 	float: left; 
+ 	margin: 0.4em 0.2em 0 0; 
+ 	cursor: pointer; 
+ }
+
+#editor-0 {   
+    height:100px;
+}
+
+.ace_content {
+	height:100px;
+}
+
+#tabs {
+	margin-top: 0px;
+	/*height:400px;*/
+}
+
+.tabbutton 
+{
+	float:right;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+.tabbuton-left
+{
+	float:left;
+}
+
+.tabbuton-include 
+{
+	float:left;
+}
+
+.user-url
+{
+	width: 100%;
+	text-align: center;
+}
+
+#dialog-form .ui-icon .ui-icon-close
+{
+	margin: 0px;
+}
