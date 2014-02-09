@@ -51,7 +51,9 @@ Support to the old tags system is still provided so old charts should render fin
 
 == Screenshots ==
 
-1. Live example <a href="http://figurebelow.com/d3/santander-shares-2012/">here</a>
+1. Live example <a href="http://figurebelow.com/d3/short-tutorial-into-wp-d3-v2/">here</a>
+2. Wp-D3 Chart Manager to edit and save multiple charts code.
+3. URL Include dialog to provide the URLs of extra style (.css) and javascript (.js) files used in the D3 snippets.
 
 == Changelog ==
 = 1.0.0 =
