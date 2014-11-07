@@ -8,7 +8,8 @@
                     height: 450 + parseInt(ed.getLang('wpd3.delta_height', 0)),
                     theme_advanced_resizing : true,
                     inline: 1
-                }, {
+                }, 
+                {
                     plugin_url: url
                 });
             });
@@ -18,6 +19,7 @@
                 cmd: 'wpd3Cmd'
             });
         },
+        toolbar: "mybutton",
         getInfo: function() {
             return {
                 longname: 'Wp-D3 plugin',
@@ -26,7 +28,7 @@
                 infourl: 'http://wordpress.org/plugins/wp-d3/',
                 version: '2.0'
             };
-        }
+        },
     });
     tinymce.PluginManager.add('wpd3', tinymce.plugins.wpd3Plugin);
 })();

@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
   {
     tinyMCEPopup.close();
   });
-  jQuery("#main-new").on ("click", "", function (event)
+  jQuery("#main-new").on ("click", "", function(event)
   {
     addNewTab(postId);
   });
@@ -133,6 +133,13 @@ Chart content deleted.
 </p>
 </div>
 <!-- end save confirmation -->
+
+<!-- confirmation dialog -->
+<div id="close-dialog-confirm" title="Unsaved Changes" style="display:none">
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0"></span>
+Exit and discard changes?</p>
+</div>
+<!-- end confirmation dialog -->
 
 </body>
 </html>

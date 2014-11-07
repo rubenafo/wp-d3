@@ -10,13 +10,14 @@ Author URI: http://www.figurebelow.com
 License: GPL2
 */
 
+include plugin_dir_path(__FILE__).'chartMethods.php';
 include plugin_dir_path(__FILE__).'utils.php';
 
 /* 
  * Init, add d3.js lib to the js scripts to be included. 
  */
 function wordpressd3_init() {
-  wp_enqueue_script ('d3', plugins_url('/js/d3.v3.min.js',__FILE__), array(), '1.0.0', false);
+  wp_enqueue_script ('d3', plugins_url('/js/d3.3.4.13.min.js',__FILE__), array(), '1.0.0', false);
 }
 
 /**
@@ -53,8 +54,8 @@ function include_resources ($attr, $content) {
  */
 function print_source ($attr, $content) {
 	extract(shortcode_atts(array('canvas' => 'canvas'), $attr));
-	$chart = $canvas;
-	$field_code = get_post_meta (get_the_ID(), $chart, true);
+	$chartId = $canvas;
+	$field_code = get_post_meta (get_the_ID(), $chartId, true);
 	$code = "";
 	$result = "";
 	if (!empty($field_code)) // custom field found
@@ -75,7 +76,13 @@ function print_source ($attr, $content) {
 	{
 		$code = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n\']+/", "\n", $content); // remove empty lines
 	}
-	$result = $result . '<div class="' . $chart . '">' . '<script type="text/javascript">' . $code . '</script>' . '</div>';
+	if (containsAutoIdFlag($code))
+	{
+		$genChartId = genRandomId ();
+		$code = replaceAutoIdFlag ($code, $genChartId);
+		$chartId = $genChartId;
+	}
+	$result = $result . '<div class="' . $chartId . '">' . '<script type="text/javascript">' . $code . '</script>' . '</div>';
 	return $result;
 }
 
