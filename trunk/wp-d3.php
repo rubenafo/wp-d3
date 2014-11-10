@@ -4,7 +4,7 @@ Plugin Name: Wordpress-d3.js
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be added directly to the posts by means of a custom javascript code editor (Wp-D3 Chart Manager)
-Version: 2.0
+Version: 2.1.1
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2

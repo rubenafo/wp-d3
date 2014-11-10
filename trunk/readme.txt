@@ -4,7 +4,7 @@ Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
