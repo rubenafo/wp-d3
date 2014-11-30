@@ -30,8 +30,25 @@ function genRandomId ()
 {
 	// Generates 
 	$randomString = substr(str_shuffle(MD5(microtime())),0,5);
-	return "wpd3-" . $randomString;
+	return "wpd3_" . $randomString;
 }
 
+/**
+ * Wraps the code inside a body function and then invokes it. The function names
+ * is the provided $id so this should be a unique identifier.
+ * E.g. 
+ * function $id () {
+ *        $code ...
+ * }
+ * $id ();
+ * This is a workaround to define namespaces in javascript and avoid conflicts
+ * when two charts defines variables with the same name.
+ * As identificador we use the $postId
+ */
+function wrapAsFunction ($code, $id) 
+{
+	$functionName = str_replace("-", "_", $id);
+	return "function " . $functionName . " () {" . $code . "}; " . $functionName . "();";
+}
 
 ?>

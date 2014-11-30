@@ -4,7 +4,7 @@ Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
 Tested up to: 4.0
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -76,9 +76,11 @@ Support to the old tags system is still provided so old charts should render fin
 = 2.0 =
 * New interface added to edit and save D3 code without interfering with post content by means of a 
 * javascript editor providing syntax highlightning, syntax error warnings and tab indentation.
-= 2.1 =
+= 2.1.1 =
 * Added WPD3_CHART_ID feature: the constant WPD3_CHART_ID can be used instead of the chart title and the 
 plugin will generate an ID automatically.
 * Updated D3.js to version 3.4.13
 * Updated ACE editor to version 1.1.7
 * Validation of the Wp-D3 plugin with Wordpress 4.0
+= 2.1.2 = 
+* Removed nasty bug that made charts overlap when multiple charts had same javascript variables.
