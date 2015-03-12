@@ -51,4 +51,14 @@ function wrapAsFunction ($code, $id)
 	return "function " . $functionName . " () {" . $code . "}; " . $functionName . "();";
 }
 
+function getJavaScriptInclude ($js)
+{
+	return '<script type="text/javascript" src=\'' . $js . '\'></script>' . PHP_EOL;
+}
+
+function getCssInclude ($css)
+{
+	return '<link type="text/css" rel="Stylesheet" href=\'' . $css . '\'/>' . PHP_EOL;
+}
+
 ?>

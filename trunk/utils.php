@@ -48,8 +48,8 @@ function getCustomFielContent ()
 	foreach ($val as $var) {
 		if (preg_match("/wpd3-/", $var))
 		{
-      array_push($keys, $var);
-      $values = get_post_custom_values($var, $postId);
+      		array_push($keys, $var);
+      		$values = get_post_custom_values($var, $postId);
 			array_push($contents, $values[0]);
 		}
 	}
@@ -101,6 +101,49 @@ function getValidFieldNumber ()
 		}
 	}
 	echo $max;
+	exit();
+}
+
+add_action ('wp_ajax_previewContent', 'previewContent');
+function previewContent ()
+{
+	$postId = $_REQUEST["postId"];
+	$editorName = $_REQUEST["editor"];
+	$val = get_post_custom_keys($postId);
+	$keys = array();
+	foreach ($val as $var) {
+		if (!strcmp($editorName, $var))
+		{
+      		$content = get_post_custom_values($var, $postId);
+      		break;
+		}
+	}
+	$code = json_decode($content[0], true);
+	$genChartId = genRandomId();
+	if (!containsAutoIdFlag ($code["code"]))
+	{
+		$genChartId = $editorName;
+	}
+	$includes = $code["includes"];
+	$code = replaceAutoIdFlag ($code["code"], $genChartId);
+	
+	$result = "";
+	foreach ($includes as $include)
+	{
+	  	if (substr_compare($include, "js", -strlen("js"), strlen("js")) === 0) {
+	        $result = $result . getJavaScriptInclude ($include);
+		}
+        if (substr_compare($include, "css", -strlen("css"), strlen("css")) === 0) {
+            $result = $result . getCssInclude ($include);
+	  	}
+	}
+	echo "<html><head>" 
+			. getJavaScriptInclude (plugins_url('wp-d3/js/d3.3.5.5.min.js'))
+		 	. $result 
+		 	. "</head>"
+		 	. "<body><div class=\"" . $genChartId . "\"\>"
+		 	. "<script type=\"text/javascript\">" . $code . "</script>"
+		    . "</body></html>";
 	exit();
 }
 ?>

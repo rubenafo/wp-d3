@@ -11,10 +11,13 @@
 <script src="<?php echo plugins_url( 'wp-d3/js/functions.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/src-min/ace.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/src-min/mode-javascript.js' ); ?>"></script>
+<script src="<?php echo plugins_url( 'wp-d3/js/jquery.colorbox-min.js' ); ?>"></script>
+
 
 <link rel="stylesheet" href="http://jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1">
 <link rel="stylesheet" href="http://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
 <link rel="stylesheet" href="<?php echo plugins_url( 'wp-d3/css/wpd3.css' ); ?>">
+<link rel="stylesheet" href="<?php echo plugins_url( 'wp-d3/css/colorbox.css' ); ?>">
 
 <script src="<?php echo includes_url( 'js/tinymce/tiny_mce_popup.js' ); ?>" type="text/javascript"></script>
 
@@ -22,11 +25,10 @@
 
 jQuery(document).ready(function($) {
   var tabs = jQuery("#tabs");
-  //var postId = jQuery(parent.post_ID).val();
   jQuery("#tabs").on ("click", "button", function (event) {
     var name = $(this).attr('id');
     var fieldNumber = name.split("-")[1];
-    if (name.match ("save-")) 
+    if (name.match ("save-"))
     {
       var editor = ace.edit("area-" +  name.split("-")[1]);
       saveTab (postId, name, editor.getSession().getValue(), $("#includes-" + fieldNumber).text());
@@ -37,11 +39,17 @@ jQuery(document).ready(function($) {
     }
     if (name.match("insert-"))
     {
-      insertRef (postId, name); 
+      insertRef (postId, name);
     }
     if (name.match ("include-"))
     {
       showIncludes (postId, name);
+    }
+    if (name.match ("preview-"))
+    {
+      var fieldName = getFieldName(postId, name.split("-")[1]);
+      window.open('admin-ajax.php?action=previewContent&postId=' + postId + 
+                  '&editor=' + fieldName, fieldName);
     }
   });
   jQuery("#main-close").on ("click", "", function(event) 
@@ -143,3 +151,4 @@ Exit and discard changes?</p>
 
 </body>
 </html>
+

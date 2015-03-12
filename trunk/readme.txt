@@ -3,8 +3,8 @@ Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
-Tested up to: 4.0
-Stable tag: 2.1.2
+Tested up to: 4.1
+Stable tag: 2.2
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -30,12 +30,10 @@ Enjoy!.
 
 == Frequently Asked Questions == 
 1. Is it possible to execute javascript code different than D3 one?
-   Technically you can use any .js file in your code if you upload it to the Wordpress' Media Library and then copy its
-   URL to the Wp-D3 "Includes" dialog.
-   This plugin is designed with D3 in mind so any extra libs are not guaranteed to work.
+   Technically you can use any .js file in your code if you upload it to the Wordpress' Media Library and then copy its URL to the Wp-D3 "Includes" dialog.
+   This plugin is designed with D3 in mind so any extra charting libs are not guaranteed to work.
 2. What about including remote javascript files (i.e. hosted in another server)?
-   Current browsers dont allow the reference of javascript code hosted in a machine different of the localhost due to security
-   concerns so this is not a limitation of the Wp-D3 plugin.
+   Browsers don't allow the reference of javascript code hosted in a machine different of the localhost due to security concerns so this is not a limitation of the Wp-D3 plugin itself.
 
 == Upgrade Notice == 
 = 1.0 = 
@@ -48,6 +46,9 @@ This version fixes a bug on plugin init. d3-link tag is now optional. Upgrade re
 Huge user interface improvement and better integration with Wordpress API.
 D3 code now can be pasted, edited and saved using a GUI without affecting the post content.
 Support to the old tags system is still provided so old charts should render fine.
+
+= 2.2 =
+Added Preview button and minor fixes.
 
 == Screenshots ==
 
@@ -71,7 +72,7 @@ Support to the old tags system is still provided so old charts should render fin
 * Implemented workaround to keep '&' symbols inside javascript code without unicode conversion.
 = 1.2.2 =
 * Fixed plugin initialization bug that generated a wrong js script include.
-* The [d3-link] tag is now optional and can be skipped if nothing needs to be   included.
+* The [d3-link] tag is now optional and can be skipped if nothing needs to be included.
 * The shipped d3.js version has been updated to D3 v3.3.10
 = 2.0 =
 * New interface added to edit and save D3 code without interfering with post content by means of a 
@@ -84,3 +85,8 @@ plugin will generate an ID automatically.
 * Validation of the Wp-D3 plugin with Wordpress 4.0
 = 2.1.2 = 
 * Removed nasty bug that made charts overlap when multiple charts had same javascript variables.
+= 2.2 =
+* Added Preview button to the Wp-D3 editor.
+* Fixed bug that made generated code not to be valid when the chart contains "<p>" hardcoded strings.
+* Updated D3 library to D3 v3.5.5
+* Validated up to Wordpress v4.1

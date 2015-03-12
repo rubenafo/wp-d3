@@ -100,6 +100,7 @@ function appendTabCode (postId, tabs, fieldNumber, fieldContent)
               "<button class=\"tabbutton\" id=\"remove-" + fieldNumber + "\">Remove</button>" +
               "<button class=\"tabbutton\" id=\"insert-" + fieldNumber + "\">Insert</button>" +
               "<button class=\"tabbutton-left\" id=\"include-" + fieldNumber + "\">Include</button>" +
+              "<button class=\"tabbutton-left\" id=\"preview-" + fieldNumber + "\">Preview</button>" +
               "<div id=\"area-" + fieldNumber + "\" style=\"height:300px; width:100%; min-height:280px;resize:none \">" + "" + 
               "</div>" );
   tabs.tabs ("refresh");

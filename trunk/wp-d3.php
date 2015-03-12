@@ -4,7 +4,7 @@ Plugin Name: Wordpress-d3.js
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be added directly to the posts by means of a custom javascript code editor (Wp-D3 Chart Manager)
-Version: 2.1.2
+Version: 2.2
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2
@@ -17,7 +17,7 @@ include plugin_dir_path(__FILE__).'utils.php';
  * Init, add d3.js lib to the js scripts to be included. 
  */
 function wordpressd3_init() {
-  wp_enqueue_script ('d3', plugins_url('/js/d3.3.4.13.min.js',__FILE__), array(), '1.0.0', false);
+  wp_enqueue_script ('d3', plugins_url('/js/d3.3.5.5.min.js',__FILE__), array(), '1.0.0', false);
 }
 
 /**
@@ -35,12 +35,10 @@ function include_resources ($attr, $content) {
 		}
     	foreach ($hrefs as $js) {
 	  		if (substr_compare($js, "js", -strlen("js"), strlen("js")) === 0) {
-	     		$result = $result . '<script type="text/javascript" ' 
-	     		          . 'src=\'' . $js . '\'></script>';
+	     		$result = $result . getJavaScriptInclude ($js);
 			}
         	if (substr_compare($js, "css", -strlen("css"), strlen("css")) === 0) {
-	     		 $result = $result . '<link type="text/css" rel="Stylesheet" '
-	     		           . 'href=\'' . $js . '\'/>';
+	     		$result = $result . getCssInclude (js);
 	  		}
 		}
   	}
@@ -65,10 +63,10 @@ function print_source ($attr, $content) {
 		foreach ($jsonCode['includes'] as $include)
 		{
 	  		if (substr_compare($include, "js", -strlen("js"), strlen("js")) === 0) {
-	        	$result = $result . '<script type="text/javascript" ' . 'src=\'' . $include . '\'></script>' . PHP_EOL;
+	        	$result = $result . getJavaScriptInclude ($include);
 			}
         	if (substr_compare($include, "css", -strlen("css"), strlen("css")) === 0) {
-            	$result = $result . '<link type="text/css" rel="Stylesheet" ' . 'href=\'' . $include . '\'/>' . PHP_EOL;
+            	$result = $result . getCssInclude ($include);
 	  		}
 		}
 	}
@@ -107,6 +105,9 @@ function restore_special_chars ($content)
 {
   $content = preg_replace('/&#038;/','&', $content);
   $content = preg_replace('/&amp;/','&', $content);
+  // These lines should fix the issue when we have "<p>" inside the js code
+  $content = preg_replace('/\n<p>/','<p>', $content);
+  $content = preg_replace('/<\/p><p>/','</p>', $content);
   return $content;
 }
 
