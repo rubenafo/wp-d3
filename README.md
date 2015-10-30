@@ -1,4 +1,4 @@
-wp-d3
+WP-D3
 =====
 
 A plugin to integrate D3 into your Wordpress post/pages.
