@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: Wordpress-d3.js
+Plugin Name: Wp-D3
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be added directly to the posts by means of a custom javascript code editor (Wp-D3 Chart Manager)
-Version: 2.2
+Version: 2.3
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2
@@ -17,7 +17,7 @@ include plugin_dir_path(__FILE__).'utils.php';
  * Init, add d3.js lib to the js scripts to be included. 
  */
 function wordpressd3_init() {
-  wp_enqueue_script ('d3', plugins_url('/js/d3.3.5.5.min.js',__FILE__), array(), '1.0.0', false);
+  wp_enqueue_script ('d3', plugins_url('/js/d3.3.5.16.min.js',__FILE__), array(), '1.0.0', false);
 }
 
 /**
@@ -97,7 +97,7 @@ add_filter( 'no_texturize_shortcodes', 'skip_d3_source' );
 
 /*
  * This function restores the ampersand that the inner wordpress behaviour changed somehow.
- * In the end, no forums nor docs seem to agree how to fix this, but this workaround works.
+ * In the end, no forums nor docs seem to agree on how to fix this, but this workaround works.
  * The first ampersand code is replaced when the post is edited in Visual Mode.
  * The second ampersand code is replaced by wordpress itself.
  */
@@ -113,19 +113,30 @@ function restore_special_chars ($content)
 
 add_action( 'wp_ajax_wpd3dialog_action', 'dialog');
 
-// remove wpautop and wptexturize for a while
-remove_filter('the_content', 'wptexturize');
-remove_filter('the_content', 'wpautop' );
+// remove wpautop and wptexturize for a while if they were enabled
+
+$isWpAutoEnabled = has_filter ('the_content', 'wpautop');
+if (isWpAutoEnabled) {
+	remove_filter('the_content', 'wpautop' );
+}
+
+$isWpTexturizeEnabled = has_filter('the_content', 'wptexturize');
+if (isWpTexturizeEnabled) {
+	remove_filter('the_content', 'wptexturize');
+}
 
 add_action( 'init', 'buttons_init');
-
 add_action('init', 'wordpressd3_init');
 add_shortcode("d3-link", "include_resources");
 add_shortcode("d3-source", "print_source");
 
 // and added again with less priority.
-add_filter( 'the_content', 'wpautop' , 90);
-add_filter( 'the_content', 'wptexturize' , 90);
+if (isWpAutoEnabled) {
+	add_filter( 'the_content', 'wpautop' , 90);
+}
+if (isWpTexturizeEnabled) {
+	add_filter( 'the_content', 'wptexturize' , 90);
+}
 
 /* Added with even less priority to make sure it's executed at the end
  * so the ampersands are restored.*/

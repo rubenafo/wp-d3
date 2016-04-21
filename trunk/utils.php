@@ -138,7 +138,7 @@ function previewContent ()
 	  	}
 	}
 	echo "<html><head>" 
-			. getJavaScriptInclude (plugins_url('wp-d3/js/d3.3.5.5.min.js'))
+			. getJavaScriptInclude (plugins_url('wp-d3/js/d3.3.5.16.min.js'))
 		 	. $result 
 		 	. "</head>"
 		 	. "<body><div class=\"" . $genChartId . "\"\>"

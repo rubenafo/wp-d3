@@ -3,8 +3,8 @@ Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
-Tested up to: 4.1
-Stable tag: 2.2
+Tested up to: 4.5
+Stable tag: 2.3
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -50,6 +50,10 @@ Support to the old tags system is still provided so old charts should render fin
 = 2.2 =
 Added Preview button and minor fixes.
 
+= 2.3 =
+Fixed accidental enablement of 'wpautop' plugin.
+D3.js version updated to v3.5.15.
+
 == Screenshots ==
 
 1. Live example <a href="http://figurebelow.com/d3/short-tutorial-into-wp-d3-v2/">here</a>
@@ -58,35 +62,39 @@ Added Preview button and minor fixes.
 4. Example displaying D3 chart taking from bl.ocks.org, in <a href="http://figurebelow.com/d3/wp-d3-and-day-hour-heatmap/">figurebelow.com</a>
 
 == Changelog ==
-= 1.0.0 =
-* First commit. Basic tag functionality, [d3-link], [d3 canvas="canvas"]
-= 1.1 =
-* Fixed d3 snippet insertion, now the code output is shown where it has been inserted inside the post.
-= 1.2 =
-* Fixed bug that provoked wpautop and wptexturize to be disabled permanently.
-* Fixed d3-link include's generation.
-* Added filter to avoid wptexturize messing the [d3-source] content.
-* Updated D3 shipped version to last 3.3.3
-* The plugin now uses the lighter d3.v3.min.js (instead of d3.v3.js).
-= 1.2.1 =
-* Implemented workaround to keep '&' symbols inside javascript code without unicode conversion.
-= 1.2.2 =
-* Fixed plugin initialization bug that generated a wrong js script include.
-* The [d3-link] tag is now optional and can be skipped if nothing needs to be included.
-* The shipped d3.js version has been updated to D3 v3.3.10
-= 2.0 =
-* New interface added to edit and save D3 code without interfering with post content by means of a 
-* javascript editor providing syntax highlightning, syntax error warnings and tab indentation.
+= 2.3 =
+* Fixed a bug that enabled 'wpautop' and 'wptexturize' plugins.
+* Updated D3 library to D3 v3.5.16
+* Validated up to Wordpress v4.5
+= 2.2 =
+* Added Preview button to the Wp-D3 editor.
+* Fixed bug that made generated code not to be valid when the chart contains "p" (HTML paragraph) hardcoded strings.
+* Updated D3 library to D3 v3.5.5
+* Validated up to Wordpress v4.1
+= 2.1.2 = 
+* Removed nasty bug that made charts overlap when multiple charts had same javascript variables.
 = 2.1.1 =
 * Added WPD3_CHART_ID feature: the constant WPD3_CHART_ID can be used instead of the chart title and the 
 plugin will generate an ID automatically.
 * Updated D3.js to version 3.4.13
 * Updated ACE editor to version 1.1.7
 * Validation of the Wp-D3 plugin with Wordpress 4.0
-= 2.1.2 = 
-* Removed nasty bug that made charts overlap when multiple charts had same javascript variables.
-= 2.2 =
-* Added Preview button to the Wp-D3 editor.
-* Fixed bug that made generated code not to be valid when the chart contains "<p>" hardcoded strings.
-* Updated D3 library to D3 v3.5.5
-* Validated up to Wordpress v4.1
+= 2.0 =
+* New interface added to edit and save D3 code without interfering with post content by means of a 
+* javascript editor providing syntax highlightning, syntax error warnings and tab indentation.
+= 1.2.2 =
+* Fixed plugin initialization bug that generated a wrong js script include.
+* The [d3-link] tag is now optional and can be skipped if nothing needs to be included.
+* The shipped d3.js version has been updated to D3 v3.3.10
+= 1.2.1 =
+* Implemented workaround to keep '&' symbols inside javascript code without unicode conversion.
+= 1.2 =
+* Fixed bug that provoked wpautop and wptexturize to be disabled permanently.
+* Fixed d3-link include's generation.
+* Added filter to avoid wptexturize messing the [d3-source] content.
+* Updated D3 shipped version to last 3.3.3
+* The plugin now uses the lighter d3.v3.min.js (instead of d3.v3.js).
+= 1.1 =
+* Fixed d3 snippet insertion, now the code output is shown where it has been inserted inside the post.
+= 1.0.0 =
+* First commit. Basic tag functionality, [d3-link], [d3 canvas="canvas"]
