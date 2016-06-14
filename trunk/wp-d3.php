@@ -4,7 +4,7 @@ Plugin Name: Wp-D3
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be added directly to the posts by means of a custom javascript code editor (Wp-D3 Chart Manager)
-Version: 2.3
+Version: 2.3.1
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2
@@ -105,9 +105,8 @@ function restore_special_chars ($content)
 {
   $content = preg_replace('/&#038;/','&', $content);
   $content = preg_replace('/&amp;/','&', $content);
-  // These lines should fix the issue when we have "<p>" inside the js code
+  // This line should fix the issue when we have "<p>" inside the js code
   $content = preg_replace('/\n<p>/','<p>', $content);
-  $content = preg_replace('/<\/p><p>/','</p>', $content);
   return $content;
 }
 
