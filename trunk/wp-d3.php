@@ -4,7 +4,7 @@ Plugin Name: Wp-D3
 Plugin URI: http://wordpress.org/extend/plugins/wp-d3/
 Description: D3 is a very popular visualization library written in Javascript. This plugins provides a set of tags to link page/post content to d3.js libraries in order to visualize the javascript snippets inside Wordpress.
 All javascript code can be added directly to the posts by means of a custom javascript code editor (Wp-D3 Chart Manager)
-Version: 2.3.1
+Version: 2.4
 Author: Ruben Afonso
 Author URI: http://www.figurebelow.com
 License: GPL2
@@ -12,12 +12,13 @@ License: GPL2
 
 include plugin_dir_path(__FILE__).'chartMethods.php';
 include plugin_dir_path(__FILE__).'utils.php';
+include plugin_dir_path(__FILE__).'options.php';
 
 /* 
  * Init, add d3.js lib to the js scripts to be included. 
  */
 function wordpressd3_init() {
-  wp_enqueue_script ('d3', plugins_url('/js/d3.3.5.16.min.js',__FILE__), array(), '1.0.0', false);
+  wp_enqueue_script ('d3', getD3LibraryInUse(), array(), '1.0.0', false);
 }
 
 /**
@@ -115,25 +116,25 @@ add_action( 'wp_ajax_wpd3dialog_action', 'dialog');
 // remove wpautop and wptexturize for a while if they were enabled
 
 $isWpAutoEnabled = has_filter ('the_content', 'wpautop');
-if (isWpAutoEnabled) {
+if ($isWpAutoEnabled) {
 	remove_filter('the_content', 'wpautop' );
 }
 
 $isWpTexturizeEnabled = has_filter('the_content', 'wptexturize');
-if (isWpTexturizeEnabled) {
+if ($isWpTexturizeEnabled) {
 	remove_filter('the_content', 'wptexturize');
 }
 
-add_action( 'init', 'buttons_init');
+add_action('init', 'buttons_init');
 add_action('init', 'wordpressd3_init');
 add_shortcode("d3-link", "include_resources");
 add_shortcode("d3-source", "print_source");
 
 // and added again with less priority.
-if (isWpAutoEnabled) {
+if ($isWpAutoEnabled) {
 	add_filter( 'the_content', 'wpautop' , 90);
 }
-if (isWpTexturizeEnabled) {
+if ($isWpTexturizeEnabled) {
 	add_filter( 'the_content', 'wptexturize' , 90);
 }
 

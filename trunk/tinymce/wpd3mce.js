@@ -26,7 +26,7 @@
                 author: 'Ruben Afonso',
                 authorurl: 'http://figurebelow.com',
                 infourl: 'http://wordpress.org/plugins/wp-d3/',
-                version: '2.0'
+                version: '2.4'
             };
         },
     });

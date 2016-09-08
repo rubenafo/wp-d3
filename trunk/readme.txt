@@ -3,8 +3,8 @@ Contributors: Ruben Afonso<ruben@figurebelow.com>
 Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
-Tested up to: 4.5
-Stable tag: 2.3.1
+Tested up to: 4.6
+Stable tag: 2.4
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -57,6 +57,13 @@ D3.js version updated to v3.5.15.
 = 2.3.1 =
 Fixed bug that removed "\<p\>" from posts occasionally.
 
+= 2.4 =
+D3.js upgraded to v4.2.
+Please note there are several changes in D3.js API so the previous code might not work as expected.
+In order to facilitate the transition, the previous D3.js version (3.5) has been kept in place besides the new v4.2.
+The D3.js library in use can be changed in Settings->Wp-D3.
+The default running version has been kept to D3.js v3.5 so the new one has to be enabled explicitely.
+
 == Screenshots ==
 
 1. Live example <a href="http://figurebelow.com/d3/short-tutorial-into-wp-d3-v2/">here</a>
@@ -65,6 +72,10 @@ Fixed bug that removed "\<p\>" from posts occasionally.
 4. Example displaying D3 chart taking from bl.ocks.org, in <a href="http://figurebelow.com/d3/wp-d3-and-day-hour-heatmap/">figurebelow.com</a>
 
 == Changelog ==
+= 2.4 =
+* Updated D3 library to D3 v4.22.
+* Added a settings option to switch between D3v3.5 and D3v4.2
+* Minor code cleaning around.
 = 2.3.1 =
 * Fixed a bug introduced in 2.2 that broke paragraph (\<p\>) tags when two of them were consecutive.
 = 2.3 =

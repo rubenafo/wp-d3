@@ -104,6 +104,16 @@ function getValidFieldNumber ()
 	exit();
 }
 
+function getD3LibraryInUse () {
+	$options = get_option( 'wpd3_settings' );
+	if ($options['wpd3_version'] == 2) {
+		return plugins_url('wp-d3/js/d3.v422.min.js');
+	}
+	else {
+		return plugins_url('wp-d3/js/d3.v35.min.js');
+	}
+}
+
 add_action ('wp_ajax_previewContent', 'previewContent');
 function previewContent ()
 {
@@ -138,7 +148,7 @@ function previewContent ()
 	  	}
 	}
 	echo "<html><head>" 
-			. getJavaScriptInclude (plugins_url('wp-d3/js/d3.3.5.16.min.js'))
+			. getJavaScriptInclude (getD3LibraryInUse())
 		 	. $result 
 		 	. "</head>"
 		 	. "<body><div class=\"" . $genChartId . "\"\>"
@@ -146,4 +156,5 @@ function previewContent ()
 		    . "</body></html>";
 	exit();
 }
+
 ?>

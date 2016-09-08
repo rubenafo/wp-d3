@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
 <script src="<?php echo plugins_url( 'wp-d3/js/jquery-2.0.3.min.js' ); ?>"></script>
-<script src="<?php echo plugins_url( 'wp-d3/js/jquery-ui-1.10.3.js' ); ?>"></script>
+<script src="<?php echo plugins_url( 'wp-d3/js/jquery-ui.1.10.4.min.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/functions.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/src-min/ace.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/src-min/mode-javascript.js' ); ?>"></script>
