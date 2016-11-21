@@ -45,11 +45,12 @@ function wpd3_existing_charts_info_render () {
     <tbody >
 		<?php
     	$count = 0;
-			$alternateRow = false;
+		$alternateRow = false;
     	$custom_posts = query_posts("showposts=-1");
+		$nonce = wp_create_nonce("wpd3-nonce");
     	foreach ($custom_posts as $post) {
 				$keys = get_post_custom_keys($post->ID);
-				foreach ($keys as $key) {
+				foreach ((array) $keys as $key) {
 					if (preg_match("/wpd3-/", $key)) {
 						if ($alternateRow == true) { 
 						?>
@@ -67,7 +68,7 @@ function wpd3_existing_charts_info_render () {
 						<td> <?php echo(get_the_title($post->ID));?></td>
 						<td> <?php echo($key);?></td>
 						<td>
-							<a class="button button-secondary" value ="" target="_blank" href="admin-ajax.php?action=previewContent&postId=<?php echo($post->ID);?>&editor=<?php echo($key);?>">Preview</a>
+							<a class="button button-secondary" value ="" target="_blank" href="admin-ajax.php?action=previewContent&postId=<?php echo($post->ID);?>&editor=<?php echo($key);?>&security=<?php echo $nonce; ?>">Preview</a>
 						</td>
 						</tr>
           <?php $count++;
@@ -112,7 +113,7 @@ function wpd3_existing_charts_info_render () {
 						<td> <?php echo(get_the_title($page));?></td>
 						<td> <?php echo($key);?></td>
 						<td>
-							<a class="button button-secondary" value ="" target="_blank" href="admin-ajax.php?action=previewContent&postId=<?php echo($page);?>&editor=<?php echo($key);?>">Preview</a>
+							<a class="button button-secondary" value ="" target="_blank" href="admin-ajax.php?action=previewContent&postId=<?php echo($page);?>&editor=<?php echo($key);?>&security=<?php echo $nonce; ?>">Preview</a>
 						</td>
 						</tr>
           <?php $count++;

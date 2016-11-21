@@ -139,11 +139,12 @@ function saveTab (postId, name, code, includeList)
       {
           'action': 'setCustomField',
           'postId': postId,
+		  'security': nonce,
           'fieldId': getFieldName(postId, numberId),
           'content': JSON.stringify({"includes": includeArray, "code":code})
       }
   )
-  .done(function () {
+  .done(function (response) {
       $("#save-ok-dialog").dialog({
         modal: true,
         buttons: {
@@ -178,19 +179,32 @@ function removeTab (postId, name)
           ajaxurl,
           {
               'action': 'deleteCustomField',
+		  	  'security': nonce,
               'postId': postId,
               'fieldId': getFieldName(postId, numberId)
           },
-          function (data, textStatus, jqXHR) {
-            $("#delete-ok-dialog").dialog({
-              modal: true,
-              buttons: {
-                Ok: function() {
-                  $( this ).dialog( "close" );
-                }
-              }
-            });
-          $("#delete-ok-dialog").dialog('option', 'title', "WpD3-" + numberId);
+          function (data, error) {
+			if (data.error) {
+				jQuery(this).dialog({
+        			modal: true,
+        			buttons: {
+          			Ok: function() {
+            			$( this ).dialog( "close" );
+          				}
+        			}
+      			});				
+			}
+			else {
+            	$("#delete-ok-dialog").dialog({
+              		modal: true,
+              		buttons: {
+                		Ok: function() {
+                  		$( this ).dialog( "close" );
+                		}
+              		}
+            	});
+          		$("#delete-ok-dialog").dialog('option', 'title', "WpD3-" + numberId);
+			}
       });
       var selected = eval(tabs.tabs('option','active'));
       $('#tabs-' + numberId).remove();

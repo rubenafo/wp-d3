@@ -13,14 +13,13 @@
 <script src="<?php echo plugins_url( 'wp-d3/js/src-min/mode-javascript.js' ); ?>"></script>
 <script src="<?php echo plugins_url( 'wp-d3/js/jquery.colorbox-min.js' ); ?>"></script>
 
-
 <link rel="stylesheet" href="http://jqueryui.com/jquery-wp-content/themes/jquery/css/base.css?v=1">
 <link rel="stylesheet" href="http://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
 <link rel="stylesheet" href="<?php echo plugins_url( 'wp-d3/css/wpd3.css' ); ?>">
 <link rel="stylesheet" href="<?php echo plugins_url( 'wp-d3/css/colorbox.css' ); ?>">
 
 <script src="<?php echo includes_url( 'js/tinymce/tiny_mce_popup.js' ); ?>" type="text/javascript"></script>
-
+<?php $nonce = wp_create_nonce("wpd3-nonce"); ?>
 <script>
 
 jQuery(document).ready(function($) {
@@ -49,7 +48,7 @@ jQuery(document).ready(function($) {
     {
       var fieldName = getFieldName(postId, name.split("-")[1]);
       window.open('admin-ajax.php?action=previewContent&postId=' + postId + 
-                  '&editor=' + fieldName, fieldName);
+                  '&editor=' + fieldName + "&security=" + nonce, fieldName);
     }
   });
   jQuery("#main-close").on ("click", "", function(event) 
@@ -64,15 +63,21 @@ jQuery(document).ready(function($) {
 
 // Global variables
 var ajaxurl = <?php echo "'" + admin_url('admin-ajax.php') + "'"; ?>;
+var nonce = <?php echo "'" . $nonce . "'"; ?>;
 var postId = jQuery(parent.post_ID).val();
 jQuery.get(
     ajaxurl,
     {
         'action': 'getCustomFielContent',
         'postId': postId,
+        'security': nonce
     }, 
-    function(response){
-      addNewTab(postId, response);
+	function(response){
+		if (response == -1) {
+			alert ("Invalid access to wp-d3 data");
+		}
+		else
+      		addNewTab(postId, response);
     }
 );
 
@@ -151,4 +156,3 @@ Exit and discard changes?</p>
 
 </body>
 </html>
-

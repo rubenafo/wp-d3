@@ -45,6 +45,11 @@ function getCustomFielContent ()
 	$val = get_post_custom_keys($postId);
 	$keys = array();
 	$contents = array();
+	$nonceValid = check_ajax_referer('wpd3-nonce', 'security');
+	if (!$nonceValid) {
+		wp_send_json_error();
+	}
+	
 	foreach ($val as $var) {
 		if (preg_match("/wpd3-/", $var))
 		{
@@ -67,13 +72,17 @@ function setCustomField ()
 	$postId = $_REQUEST["postId"];
 	$fieldId = $_REQUEST["fieldId"];
 	$content = $_REQUEST["content"];
-	
+	$nonceValid = check_ajax_referer('wpd3-nonce', 'security');
+	if (!$nonceValid) {
+		wp_send_json_error(array("error" => 1));
+	}
+
 	// delete and add because using update_post_meta
 	// makes the custom field values at post override the
 	// values stored previously
 	delete_post_meta($postId, $fieldId);
 	add_post_meta($postId, $fieldId, $content);
-	exit();
+	wp_send_json(array('error' => 0));
 }
 
 add_action ('wp_ajax_deleteCustomField', 'deleteCustomField');
@@ -81,13 +90,23 @@ function deleteCustomField ()
 {
 	$postId = $_REQUEST["postId"];
 	$fieldId = $_REQUEST["fieldId"];
+	$nonceValid = check_ajax_referer('wpd3-nonce', 'security');
+	if (!$nonceValid) {
+		wp_send_json_error(array("error" => 1));
+	}
 	delete_post_meta($postId, $fieldId);
+	wp_send_json(array("error" => 0));
 }
 
 add_action ('wp_ajax_getValidFieldNumber', 'getValidFieldNumber');
 function getValidFieldNumber ()
 {
 	$postId = $_REQUEST["postId"];
+	$nonceValid = check_ajax_referer('wpd3-nonce', 'security');
+	if (!$nonceValid) {
+		wp_send_json_error(array("error" => 1));
+	}
+
 	$fieldNames = get_post_custom_keys($postId);
 	$max = 0;
 	foreach ($fieldNames as $fieldName) {
@@ -101,13 +120,13 @@ function getValidFieldNumber ()
 		}
 	}
 	echo $max;
-	exit();
+	wp_send_json(array("error" => 0));
 }
 
 function getD3LibraryInUse () {
 	$options = get_option( 'wpd3_settings' );
 	if ($options['wpd3_version'] == 2) {
-		return plugins_url('wp-d3/js/d3.v422.min.js');
+		return plugins_url('wp-d3/js/d3.v43.min.js');
 	}
 	else {
 		return plugins_url('wp-d3/js/d3.v35.min.js');
@@ -119,6 +138,10 @@ function previewContent ()
 {
 	$postId = $_REQUEST["postId"];
 	$editorName = $_REQUEST["editor"];
+	$nonceValid = check_ajax_referer('wpd3-nonce', 'security');
+	if (!$nonceValid) {
+		wp_send_json_error();
+	}
 	$val = get_post_custom_keys($postId);
 	$keys = array();
 	foreach ($val as $var) {

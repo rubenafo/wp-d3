@@ -4,7 +4,7 @@ Donate link: http://www.figurebelow.com
 Tags: d3, visualization, javascript, svg, charts
 Requires at least: 3.0
 Tested up to: 4.6
-Stable tag: 2.4
+Stable tag: 2.4.1
 License: GPL2
 
 A plugin to integrate D3 into your Wordpress post/pages.
@@ -64,6 +64,11 @@ In order to facilitate the transition, the previous D3.js version (3.5) has been
 The D3.js library in use can be changed in Settings->Wp-D3.
 The default running version has been kept to D3.js v3.5 so the new one has to be enabled explicitely.
 
+= 2.4.1 = 
+Security fix upgrade.
+D3.js upgraded to v4.3.
+A CSRF vulnerability has been fixed, thanks to Jouku Pynnonen <jouko@iki.fi>.
+
 == Screenshots ==
 
 1. Live example <a href="http://figurebelow.com/d3/short-tutorial-into-wp-d3-v2/">here</a>
@@ -72,6 +77,9 @@ The default running version has been kept to D3.js v3.5 so the new one has to be
 4. Example displaying D3 chart taking from bl.ocks.org, in <a href="http://figurebelow.com/d3/wp-d3-and-day-hour-heatmap/">figurebelow.com</a>
 
 == Changelog ==
+= 2.4.1 =
+* Security fix release to prevent CSRF attacks to the plugin functionality.
+* D3.js library updated to latest v4.3.
 = 2.4 =
 * Updated D3 library to D3 v4.22.
 * Added a settings option to switch between D3v3.5 and D3v4.2
